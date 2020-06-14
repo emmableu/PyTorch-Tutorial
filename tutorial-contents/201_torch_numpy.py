@@ -13,7 +13,7 @@ import numpy as np
 
 # convert numpy to tensor or vise versa
 np_data = np.arange(6).reshape((2, 3))
-torch_data = torch.from_numpy(np_data)
+torch_data = torch.FloatTensor(np_data)
 tensor2array = torch_data.numpy()
 print(
     '\nnumpy array:', np_data,          # [[0 1 2], [3 4 5]]
@@ -48,16 +48,5 @@ print(
 # matrix multiplication
 data = [[1,2], [3,4]]
 tensor = torch.FloatTensor(data)  # 32-bit floating point
-# correct method
-print(
-    '\nmatrix multiplication (matmul)',
-    '\nnumpy: ', np.matmul(data, data),     # [[7, 10], [15, 22]]
-    '\ntorch: ', torch.mm(tensor, tensor)   # [[7, 10], [15, 22]]
-)
-# incorrect method
-data = np.array(data)
-print(
-    '\nmatrix multiplication (dot)',
-    '\nnumpy: ', data.dot(data),        # [[7, 10], [15, 22]]
-    '\ntorch: ', tensor.dot(tensor)     # this will convert tensor to [1,2,3,4], you'll get 30.0
-)
+d = torch.mm(tensor, tensor)
+print(d)
